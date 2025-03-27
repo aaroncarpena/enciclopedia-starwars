@@ -1,17 +1,17 @@
-import { useContext } from "react";
 import Nav from "./Nav";
-import { contextoPelicula } from "../../Contextos/ProveedorPeliculas.jsx";
 import useProveedorPelicula from "../../Hooks/useProveedorPelicula.js";
+import './Cabecera.css'
 const Cabecera = () => {
-  //const {sandalia} = useProveedorPelicula();
-  const {sandalia} = useContext(contextoPelicula);
-  console.log(sandalia)
-  // console.log(contextoPelicula)
+  const {peliculas, error} = useProveedorPelicula();
 
   return (
     <>
         <h1>ENCICLOPEDIA STARWARS</h1>
-        <p>{sandalia}</p>
+        <ul>
+          {peliculas.map((pelicula) => (
+            <li key={pelicula.episode_id}>{pelicula.episode_id}. {pelicula.title}</li>
+          ))}
+        </ul>
         <Nav />
     </>
   )

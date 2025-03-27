@@ -1,9 +1,9 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const contextoPelicula = createContext();
 const ProveedorPeliculas = ({children}) => {
-const sandalia = "Las sandalias están muy guapas";
-const datosAExportar = {sandalia}
+ 
+const datosAExportar = {}
   return(
     <contextoPelicula.Provider value={datosAExportar}>
         {children}
