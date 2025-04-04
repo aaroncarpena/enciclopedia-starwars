@@ -3,6 +3,7 @@ import Cabecera from './componentes/Estructura/Cabecera';
 import Pie from './componentes/Estructura/Pie';
 import Contenido from './componentes/Estructura/Contenido';
 import ProveedorPeliculas from './Contextos/ProveedorPeliculas';
+import InfoPeliculas from './componentes/Estructura/paginas/InfoPeliculas.jsx';
 import './App.css'
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
     <ProveedorPeliculas>
       <Contenedor>
       <Cabecera />
-      <Contenido />
+      <Contenido>
+      </Contenido>
       <Pie />
       </Contenedor>
     </ProveedorPeliculas>

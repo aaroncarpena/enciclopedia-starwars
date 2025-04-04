@@ -1,20 +1,32 @@
-import Nav from "./Nav";
-import useProveedorPelicula from "../../Hooks/useProveedorPelicula.js";
-import './Cabecera.css'
-const Cabecera = () => {
-  const {peliculas, error} = useProveedorPelicula();
+import { contextoPelicula } from "../../Contextos/ProveedorPeliculas";
+import { useContext, useState } from "react";
+import './Cabecera.css';
+import InfoPeliculas from "./paginas/InfoPeliculas";
 
+const Cabecera = () => {
+  const { peliculas, error } = useContext(contextoPelicula);
+  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
+  
   return (
     <>
-        <h1>ENCICLOPEDIA STARWARS</h1>
-        <ul>
-          {peliculas.map((pelicula) => (
-            <li key={pelicula.episode_id}>{pelicula.episode_id}. {pelicula.title}</li>
-          ))}
-        </ul>
-        <Nav />
+      <h1>ENCICLOPEDIA STARWARS</h1>
+      <ul>
+        {peliculas.map((pelicula) => (
+          <li 
+            onClick={() => {
+              console.log("Pelicula seleccionada: ", pelicula);
+              setPeliculaSeleccionada(pelicula);
+            }} 
+            key={pelicula.episode_id}
+          >
+            {pelicula.episode_id}. {pelicula.title}
+          </li>
+        ))}
+      </ul>
+      
+       {peliculaSeleccionada && <InfoPeliculas pelicula={peliculaSeleccionada} />}
     </>
-  )
-}
+  );
+};
 
 export default Cabecera;
