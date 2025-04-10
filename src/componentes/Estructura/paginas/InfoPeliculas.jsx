@@ -26,6 +26,7 @@ const InfoPeliculas = ({ pelicula }) => {
       </div>
       <div>
         <h4>Personajes: </h4>
+        {/* Modificar */}
         <ul>
           {personajes[pelicula.episode_id].map((personaje, index) => (
             <li onClick={() => {

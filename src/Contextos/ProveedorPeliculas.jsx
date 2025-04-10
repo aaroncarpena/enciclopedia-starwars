@@ -5,6 +5,8 @@ const contextoPelicula = createContext();
 const ProveedorPeliculas = ({ children }) => {
   const [peliculas, setPeliculas] = useState([]);
   const [personajes, setPersonajes] = useState({});
+  const [naves, setNaves] = useState([]);
+  const [vehiculos, setVehiculos] = useState([]);
 
   const traerPeliculas = () => {
     fetch('https://swapi.py4e.com/api/films/')
@@ -34,6 +36,25 @@ const ProveedorPeliculas = ({ children }) => {
         });
     });
   };
+  //Modificar
+  const traerNaves = (personaje) => {
+    let navesTemp = [];
+    characters.starships.forEach((url) => {
+      fetch(url)
+      .then((res) => res.json())
+      .then((nave) => {
+        navesTemp.push(nave);
+        if(navesTemp.length === starships.length){
+          setNaves((prev) => ({
+            ...prev, [characters.name] : navesTemp,
+          }));
+        }
+      });
+    });
+  };
+  const traerVehiculos = (personaje) => {
+
+  }
 
   useEffect(() => {
     traerPeliculas();

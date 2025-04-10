@@ -1,6 +1,8 @@
-import React from "react";
-
+import {useState, useContext} from "react";
+import { contextoPelicula } from "../../../Contextos/ProveedorPeliculas.jsx";
+import InfoNaves from "./InfoNaves.jsx";
 const InfoPersonajes = ({personaje}) => {
+
   return (
     <>
       <div>
@@ -29,6 +31,7 @@ const InfoPersonajes = ({personaje}) => {
           {personaje.eye_color}
         </p>
       </div>
+      <button>Pilota</button>
     </>
   );
 };
