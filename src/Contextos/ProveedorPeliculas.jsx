@@ -8,6 +8,14 @@ const ProveedorPeliculas = ({ children }) => {
   const [naves, setNaves] = useState([]);
   const [vehiculos, setVehiculos] = useState([]);
 
+  const traerDatos = (url) => {
+    return fetch(url).then((respuesta) => {
+      return respuesta.json();
+    }).then((datos) => {
+      return datos;
+    });
+  };
+
   const traerPeliculas = () => {
     fetch('https://swapi.py4e.com/api/films/')
       .then((respuesta) => respuesta.json())
@@ -18,39 +26,21 @@ const ProveedorPeliculas = ({ children }) => {
         });
       });
   };
-  //Modificar
-  const traerPersonajes = (pelicula) => {
-
-    let personajesTemp = [];
-    pelicula.characters.forEach((url) => {
-      fetch(url)
-        .then((res) => res.json())
-        .then((personaje) => {
-          personajesTemp.push(personaje);
-          if (personajesTemp.length === pelicula.characters.length) {
-            setPersonajes((prev) => ({
-              ...prev,
-              [pelicula.episode_id]: personajesTemp,
-            }));
-          }
-        });
-    });
+  const traerPersonajes = async (listadoPersonajes) => {
+    let personajesTemporales = [];
+    listadoPersonajes.map((valor, indice) => {
+      personajesTemporales = [...personajesTemporales, traerDatos(valor)];
+    })
+    const datos = await Promise.allSettled(personajesTemporales);
+    setPersonajes[datos];
   };
-  //Modificar
-  const traerNaves = (personaje) => {
-    let navesTemp = [];
-    characters.starships.forEach((url) => {
-      fetch(url)
-      .then((res) => res.json())
-      .then((nave) => {
-        navesTemp.push(nave);
-        if(navesTemp.length === starships.length){
-          setNaves((prev) => ({
-            ...prev, [characters.name] : navesTemp,
-          }));
-        }
-      });
-    });
+  const traerNaves = async (listadoNaves) => {
+    let navesTemporales = [];
+    listadoNaves.map((valor, indice) => {
+      navesTemporales = [...navesTemporales, traerDatos(valor)];
+    })
+    const datos = await Promise.allSettled(navesTemporales);
+    setNaves[datos];
   };
   const traerVehiculos = (personaje) => {
 
@@ -63,6 +53,12 @@ const ProveedorPeliculas = ({ children }) => {
   const datosAExportar = {
     peliculas,
     personajes,
+    naves,
+    vehiculos,
+    traerNaves,
+    traerPersonajes,
+    traerVehiculos,
+    traerPeliculas
   };
 
   return (
