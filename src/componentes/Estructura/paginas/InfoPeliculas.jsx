@@ -1,11 +1,13 @@
 import { formatoEuropeo } from "../../../biblioteca/biblioteca.js";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { contextoPelicula } from "../../../Contextos/ProveedorPeliculas.jsx";
 import InfoPersonajes from "./InfoPersonajes.jsx";
 
 const InfoPeliculas = ({ pelicula }) => {
-  const { personajes } = useContext(contextoPelicula);
+  const { personajes, traerPersonajes } = useContext(contextoPelicula);
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null)
+
+
   return (
     <>
       <div>
@@ -26,13 +28,9 @@ const InfoPeliculas = ({ pelicula }) => {
       </div>
       <div>
         <h4>Personajes: </h4>
-        {/* Modificar */}
         <ul>
-          {personajes[pelicula.episode_id].map((personaje, index) => (
-            <li onClick={() => {
-              setPersonajeSeleccionado(personaje)
-            }} key={index}>{personaje.name}</li>
-          ))}
+          
+          
         </ul>
 
         {personajeSeleccionado && <InfoPersonajes personaje={personajeSeleccionado} />}

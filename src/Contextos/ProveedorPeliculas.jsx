@@ -8,12 +8,14 @@ const ProveedorPeliculas = ({ children }) => {
   const [naves, setNaves] = useState([]);
   const [vehiculos, setVehiculos] = useState([]);
 
-  const traerDatos = (url) => {
-    return fetch(url).then((respuesta) => {
-      return respuesta.json();
-    }).then((datos) => {
-      return datos;
-    });
+  const traerDatos = async (url) => {
+    try {
+      const response = await fetch(url);
+      return await response.json();
+    } catch (error) {
+      console.error("Error en traerDatos:", error);
+      return null;
+    }
   };
 
   const traerPeliculas = () => {
@@ -26,14 +28,16 @@ const ProveedorPeliculas = ({ children }) => {
         });
       });
   };
-  const traerPersonajes = async (listadoPersonajes) => {
+  const traerPersonajes = async (listadoPersonajes, episode_id) => {
     let personajesTemporales = [];
-    listadoPersonajes.map((valor, indice) => {
+    listadoPersonajes.characters.map((valor, indice) => {
       personajesTemporales = [...personajesTemporales, traerDatos(valor)];
     })
     const datos = await Promise.allSettled(personajesTemporales);
+    console.log("Estos son los datos: ", datos)
     setPersonajes[datos];
   };
+  
   const traerNaves = async (listadoNaves) => {
     let navesTemporales = [];
     listadoNaves.map((valor, indice) => {
@@ -42,14 +46,19 @@ const ProveedorPeliculas = ({ children }) => {
     const datos = await Promise.allSettled(navesTemporales);
     setNaves[datos];
   };
-  const traerVehiculos = (personaje) => {
-
+  const traerVehiculos = async (listadoVehiculos) => {
+    let vehiculosTemporales = [];
+    listadoVehiculos.map((valor, indice) => {
+      vehiculosTemporales = [...vehiculosTemporales, traerDatos(valor)];
+    })
+    const datos = await Promise.allSettled(vehiculosTemporales);
+    setVehiculos[datos]
   }
 
   useEffect(() => {
     traerPeliculas();
   }, []);
-
+  
   const datosAExportar = {
     peliculas,
     personajes,
