@@ -1,37 +1,17 @@
-import {useState, useContext} from "react";
+import {useState, useContext, useEffect} from "react";
 import { contextoPelicula } from "../../../Contextos/ProveedorPeliculas.jsx";
 import InfoNaves from "./InfoNaves.jsx";
-const InfoPersonajes = ({personaje}) => {
-
+import InfoPersonaje from "./InfoPersonaje.jsx";
+const InfoPersonajes = ({listado}) => {
+  const {personajes, traerPersonajes} = useContext(contextoPelicula);
+ 
   return (
     <>
       <div>
-        <p>
-          <strong>Nombre:</strong>
-          {personaje.name}
-        </p>
-        <p>
-          <strong>Género:</strong>
-          {personaje.gender}
-        </p>
-        <p>
-          <strong>Altura:</strong>
-          {personaje.height}
-        </p>
-        <p>
-          <strong>Peso:</strong>
-          {personaje.mass}
-        </p>
-        <p>
-          <strong>Color de pelo:</strong>
-          {personaje.hair_color}
-        </p>
-        <p>
-          <strong>Color de ojos:</strong>
-          {personaje.eye_color}
-        </p>
+        {listado.map((v) => {
+          traerPersonajes(v);
+        })}
       </div>
-      <button>Pilota</button>
     </>
   );
 };

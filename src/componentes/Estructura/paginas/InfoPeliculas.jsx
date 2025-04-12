@@ -4,9 +4,8 @@ import { contextoPelicula } from "../../../Contextos/ProveedorPeliculas.jsx";
 import InfoPersonajes from "./InfoPersonajes.jsx";
 
 const InfoPeliculas = ({ pelicula }) => {
-  const { personajes, traerPersonajes } = useContext(contextoPelicula);
-  const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null)
 
+  
 
   return (
     <>
@@ -27,13 +26,8 @@ const InfoPeliculas = ({ pelicula }) => {
         </p>
       </div>
       <div>
-        <h4>Personajes: </h4>
-        <ul>
-          
-          
-        </ul>
-
-        {personajeSeleccionado && <InfoPersonajes personaje={personajeSeleccionado} />}
+        <h3>Personajes:</h3>
+        <InfoPersonajes listado={pelicula.characters} />  
       </div>
     </>
   );

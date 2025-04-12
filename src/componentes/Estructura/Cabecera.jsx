@@ -14,7 +14,6 @@ const Cabecera = () => {
         {peliculas.map((pelicula) => (
           <li 
             onClick={() => {
-              console.log("Pelicula seleccionada: ", pelicula);
               setPeliculaSeleccionada(pelicula);
             }} 
             key={pelicula.episode_id}

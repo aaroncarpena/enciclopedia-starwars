@@ -30,11 +30,14 @@ const ProveedorPeliculas = ({ children }) => {
   };
   const traerPersonajes = async (listadoPersonajes, episode_id) => {
     let personajesTemporales = [];
-    listadoPersonajes.characters.map((valor, indice) => {
-      personajesTemporales = [...personajesTemporales, traerDatos(valor)];
+    listadoPersonajes.map((valor, indice) => {
+      personajesTemporales = [...personajesTemporales, traerDatos(valor, indice)];
     })
     const datos = await Promise.allSettled(personajesTemporales);
-    console.log("Estos son los datos: ", datos)
+    //console.log("Estos son los datos: ", datos)
+    // datos.map((v,i) => {
+    //   console.log(v.value.name)
+    // })
     setPersonajes[datos];
   };
   
