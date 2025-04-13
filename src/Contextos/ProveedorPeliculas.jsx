@@ -28,17 +28,17 @@ const ProveedorPeliculas = ({ children }) => {
         });
       });
   };
-  const traerPersonajes = async (listadoPersonajes, episode_id) => {
+  const traerPersonajes = async (listadoPersonajes) => {
     let personajesTemporales = [];
-    listadoPersonajes.map((valor, indice) => {
-      personajesTemporales = [...personajesTemporales, traerDatos(valor, indice)];
+    listadoPersonajes.map((valor) => {
+      personajesTemporales = [...personajesTemporales, traerDatos(valor)];
     })
     const datos = await Promise.allSettled(personajesTemporales);
     //console.log("Estos son los datos: ", datos)
     // datos.map((v,i) => {
     //   console.log(v.value.name)
     // })
-    setPersonajes[datos];
+    setPersonajes(datos);
   };
   
   const traerNaves = async (listadoNaves) => {
@@ -47,7 +47,7 @@ const ProveedorPeliculas = ({ children }) => {
       navesTemporales = [...navesTemporales, traerDatos(valor)];
     })
     const datos = await Promise.allSettled(navesTemporales);
-    setNaves[datos];
+    setNaves(datos);
   };
   const traerVehiculos = async (listadoVehiculos) => {
     let vehiculosTemporales = [];
@@ -55,7 +55,7 @@ const ProveedorPeliculas = ({ children }) => {
       vehiculosTemporales = [...vehiculosTemporales, traerDatos(valor)];
     })
     const datos = await Promise.allSettled(vehiculosTemporales);
-    setVehiculos[datos]
+    setVehiculos(datos)
   }
 
   useEffect(() => {

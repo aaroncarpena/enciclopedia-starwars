@@ -2,6 +2,7 @@ import { formatoEuropeo } from "../../../biblioteca/biblioteca.js";
 import { useContext, useState, useEffect } from "react";
 import { contextoPelicula } from "../../../Contextos/ProveedorPeliculas.jsx";
 import InfoPersonajes from "./InfoPersonajes.jsx";
+import ListadoPersonajes from "./ListadoPersonajes.jsx";
 
 const InfoPeliculas = ({ pelicula }) => {
 
@@ -27,8 +28,8 @@ const InfoPeliculas = ({ pelicula }) => {
       </div>
       <div>
         <h3>Personajes:</h3>
-        <InfoPersonajes listado={pelicula.characters} />  
-      </div>
+        <ListadoPersonajes listadoAMostrar={pelicula.characters} />
+        </div>
     </>
   );
 };

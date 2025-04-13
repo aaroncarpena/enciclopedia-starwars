@@ -1,19 +1,19 @@
-import {useState, useContext, useEffect} from "react";
-import { contextoPelicula } from "../../../Contextos/ProveedorPeliculas.jsx";
-import InfoNaves from "./InfoNaves.jsx";
-import InfoPersonaje from "./InfoPersonaje.jsx";
-const InfoPersonajes = ({listado}) => {
-  const {personajes, traerPersonajes} = useContext(contextoPelicula);
- 
+import React from 'react'
+import InfoPersonaje from './InfoPersonaje.jsx'
+
+const InfoPersonajes = ({personaje}) => {
   return (
     <>
       <div>
-        {listado.map((v) => {
-          traerPersonajes(v);
+        {personaje.map((v) => {
+          return (
+            <InfoPersonaje personaje={v}/>
+          )
         })}
-      </div>
+        </div>    
+    
     </>
-  );
-};
+  )
+}
 
-export default InfoPersonajes;
+export default InfoPersonajes
